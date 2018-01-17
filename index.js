@@ -1,12 +1,19 @@
 const awsIot = require('aws-iot-device-sdk');
 const os = require('os')
 
+
+
+
 const device = awsIot.device({
   keyPath: "./certificates/f276265af0-private.pem.key",
   certPath: "./certificates/f276265af0-certificate.pem.crt",
   caPath: "./certificates/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
   clientId: "ram-reader_001",
-  host: "a328ephb9wkpfr.iot.us-west-2.amazonaws.com"
+  host: "a328ephb9wkpfr.iot.us-west-2.amazonaws.com",
+  protocol: "wss",
+  accessKeyId: "AKIAI4QNLVRUMXPW5NNA",
+  secretKey: "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",
+  port: 443
 });
 
 function Timer(fn, t) {
