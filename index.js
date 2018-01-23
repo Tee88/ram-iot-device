@@ -5,11 +5,11 @@ const os = require('os')
 
 
 const device = awsIot.device({
-  keyPath: "./certificates/a45aefa0c2-private.pem.key",
-  certPath: "./certificates/a45aefa0c2-certificate.pem.crt",
+  keyPath: "./certificates/xxxxxxxxxx-private.pem.key",
+  certPath: "./certificates/xxxxxxxxxx-certificate.pem.crt",
   caPath: "./certificates/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
   clientId: "ram-reader_002",
-  host: "a328ephb9wkpfr.iot.eu-central-1.amazonaws.com",
+  host: process.env.DEVICE_ENDPOINT,
   protocol: "wss",
   port: 443
   // accessKeyId: "<AWS_ACCESS_KEY_ID>",
