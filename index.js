@@ -19,6 +19,7 @@ const device = awsIot.device({
   //to env variables by running this in reminal :
   // export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
   // export export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+  // same with device endpoint : export DEVICE_ENDPOINT=<YOUR DEVICE ENDPOINT>
   // Each shell session keeps track of its own shell and environmental variables.
   // so if you terminate the shell, run the lines above again.
 
