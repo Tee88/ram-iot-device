@@ -5,16 +5,22 @@ const os = require('os')
 
 
 const device = awsIot.device({
-  keyPath: "./certificates/b398943c6a-private.pem.key",
-  certPath: "./certificates/b398943c6a-certificate.pem.crt",
+  keyPath: "./certificates/a45aefa0c2-private.pem.key",
+  certPath: "./certificates/a45aefa0c2-certificate.pem.crt",
   caPath: "./certificates/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
-  clientId: "ram-reader_001",
-  host: "a328ephb9wkpfr.iot.us-west-2.amazonaws.com",
+  clientId: "ram-reader_002",
+  host: "a328ephb9wkpfr.iot.eu-central-1.amazonaws.com",
   protocol: "wss",
-  accessKeyId: "AKIAI4QNLVRUMXPW5NNA",
-  secretKey: "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",
   port: 443
+  // accessKeyId: "<AWS_ACCESS_KEY_ID>",
+  // secretKey: "<AWS_SECRET_ACCESS_KEY>",
 });
+  // for security reasons its better to add the accessKeyId and secretKey
+  //to env variables by running this in reminal :
+  // export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+  // export export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+  // Each shell session keeps track of its own shell and environmental variables.
+  // so if you terminate the shell, run the lines above again.
 
 function Timer(fn, t) {
   var timerObj = setInterval(fn, t);
@@ -45,8 +51,12 @@ function Timer(fn, t) {
 
 
 let sendUsage = new Timer (()=>{
-  device.publish('ram', JSON.stringify({message: `memory useage ${os.freemem()} out of ${os.totalmem()}`}))
-},1000)
+  device.publish('ram', JSON.stringify({
+    totalMemory: os.totalmem(),
+    usedMemory: os.freemem(),
+    timeStamp: new Date()
+  }))
+},5000)
 
 device
   .on('connect', function() {
